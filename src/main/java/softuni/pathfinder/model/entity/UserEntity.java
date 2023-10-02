@@ -29,7 +29,7 @@ public class UserEntity extends BaseEntity {
     @ManyToMany
     private Set<RoleEntity> roles;
 
-    public UserEntity(Set<RoleEntity> roles) {
+    public UserEntity() {
         this.roles = new HashSet<>();
     }
 
