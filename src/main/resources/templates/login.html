@@ -24,7 +24,7 @@
         <div class="row g-3 align-items-center">
 
             <form
-                    th:action="@{/users/register}"
+                    th:action="@{/users/login}"
                     th:method="post">
                 <div>
                     <div class="col-auto">
@@ -33,6 +33,7 @@
                     <div class="col-auto">
                         <input type="text"
                                name="username"
+                               value="TestUser"
                                required minlength="4" maxlength="20"
                                id="inputUsername"
                                class="form-control"
@@ -45,6 +46,7 @@
                     </div>
                     <div class="col-auto">
                         <input type="password"
+                               value="test01"
                                name="password"
                                required minlength="4" maxlength="20"
                                id="inputPassword" class="form-control"
