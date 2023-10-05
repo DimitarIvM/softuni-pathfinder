@@ -22,30 +22,30 @@
 <header>
     <nav class="main-nav">
         <ul>
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="/">Login</a>
-                </li>
-                <li>
-                    <a href="/">Register</a>
-                </li>
-                <li>
-                    <a href="/">About</a>
-                </li>
-				<li>
-                    <a href="/">Add new route</a>
-                </li>
-                <li>
-                    <a href="/">Profile</a>
-                </li>
-                <li>
-                    <a href="/">Admin</a>
-                </li>
-                <li>
-                    <a href="/">Logout</a>
-                </li>
+            <li th:unless="${@currentUser.isLogged()}" >
+                <a href="/">Home</a>
+            </li>
+            <li th:unless="${@currentUser.isLogged()}" >
+                <a th:href="@{/users/login}">Login</a>
+            </li>
+            <li th:unless="${@currentUser.isLogged()}">
+                <a th:href="@{/users/register}">Register</a>
+            </li>
+            <li th:unless="${@currentUser.isLogged()}">
+                <a th:href="@{/about}">About</a>
+            </li>
+            <li th:if="${@currentUser.isLogged()}" >
+                <a th:href="@{/add-route}">Add new route</a>
+            </li>
+            <li th:if="${@currentUser.isLogged() }" >
+                <a href="/users/profile">Profile</a>
+            </li>
+            <li th:if="${@currentUser.isLogged() && @currentUser.isAdmin()}">
+                <a href="/about">Admin</a>
+            </li>
+            <li th:if="${@currentUser.isLogged()}"  >
+                <a href="/users/logout">Logout</a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -53,8 +53,8 @@
 <!-- Top Container -->
 <div class="row justify-content-center ">
     <form id="add-route-form" class="w-50 rounded text-white mt-5"
-          action="/" 
-          method="/" enctype="multipart/form-data">
+          th:action="@{/add-route}"
+          th:method="post" enctype="multipart/form-data">
 
         <h3 class="border-left border-light pl-2">Add a new route</h3>
         <div>
@@ -95,8 +95,8 @@
                 <label for="inputGpx" class="col-form-label ">GPX Coordinates</label>
             </div>
             <div class="form-group">
-                <input type="file" name="gpxCoordinates"
-					   required
+                <input type="file"
+                       name="gpxCoordinates"
                        id="inputGpx"
                        class="form-control-file"
                        aria-describedby="inputGpxError">
@@ -107,9 +107,15 @@
         <div>
             <div class="form-group">
                 <label for="level">Level</label>
-                <select id="level" class="custom-select">
-                    <option value="" selected>Select level</option>
-                    <option value="1" text="ADVANCED">Select level</option>
+                <select id="level"
+                        name="level"
+                        class="custom-select">
+                    <option  value="" selected>Select level</option>
+                    <option
+                            th:each="l: ${T(softuni.pathfinder.model.entity.enums.Level).values()}"
+
+                            th:value="${l}" th:text="${l}">Select level
+                    </option>
                 </select>
             </div>
         </div>
@@ -117,16 +123,22 @@
 
             <div class="form-group">
                 <label for="videoUrl">Video Url (only last eleven characters from Youtube)</label>
-                <input id="videoUrl" type="text"
-                       class="form-control" placeholder="Video url">
+                <input id="videoUrl"
+                       type="text"
+                       class="form-control"
+                       placeholder="Video url">
             </div>
         </div>
 
         <div>
             <div class="form-group p-3">
                 <label class="p-2" for="categories">Categories:</label>
-                <input class="m-3" type="checkbox" name="categories" id="categories"
-                       value="1" text="Category">
+                <input
+                        th:each="c: ${T(softuni.pathfinder.model.entity.enums.Category).values()}"
+                        class="m-3" type="checkbox"
+                       name="categories"
+                       id="categories"
+                       th:value="${c}"  th:text="${c}">
 				<br>
             </div>
         </div>

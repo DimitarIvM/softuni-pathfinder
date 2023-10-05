@@ -39,10 +39,6 @@ public class RouteEntity  extends BaseEntity {
 @ManyToMany
 private Set<CategoryEntity> categories;
 
-    public RouteEntity(Set<CategoryEntity> categories) {
-        this.categories = new HashSet<>();
-    }
-
     public Set<CategoryEntity> getCategories() {
         return categories;
     }
@@ -50,6 +46,12 @@ private Set<CategoryEntity> categories;
     public void setCategories(Set<CategoryEntity> categories) {
         this.categories = categories;
     }
+
+    public RouteEntity() {
+        this.categories = new HashSet<CategoryEntity>();
+    }
+
+
 
     public String getGpxCoordinates() {
         return gpxCoordinates;
@@ -89,5 +91,9 @@ private Set<CategoryEntity> categories;
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public void addCategories(Set<CategoryEntity> categories) {
+        this.categories.addAll(categories);
     }
 }

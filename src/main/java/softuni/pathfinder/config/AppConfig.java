@@ -1,5 +1,6 @@
 package softuni.pathfinder.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,5 +13,10 @@ public class AppConfig {
     public PasswordEncoder passwordEncoder(){
 
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+    }
+
+    @Bean
+    public ModelMapper modeMapper(){
+        return new ModelMapper();
     }
 }

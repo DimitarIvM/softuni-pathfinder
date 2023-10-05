@@ -79,6 +79,9 @@ public class UserService {
             if (isLoginSuccessful ){
 
                 currentUser.setLogged(true);
+                currentUser.setAge(userEntity.getAge());
+                currentUser.setFullName(userEntity.getFullName());
+                currentUser.setUsername(userEntity.getUsername());
 
                 if (roles.contains(Role.ADMIN)){
                     currentUser.setAdmin(true);
@@ -97,5 +100,9 @@ public class UserService {
 
     public void logoutUser(){
         currentUser.logout();
+    }
+
+    public UserEntity getUser(Long id) {
+      return   userRepository.findById(id).get();
     }
 }

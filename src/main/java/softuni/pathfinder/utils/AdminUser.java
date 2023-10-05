@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 @SessionScope
-@Component("currentUser")
+@Component("adminUser")
 public class AdminUser {
 
     private boolean isAdmin;
